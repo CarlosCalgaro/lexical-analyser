@@ -1,10 +1,19 @@
 TOKENS = [
+   ('tk_none',     r'\n'),
    ('tk_int',      r'^\bint\b'),
    ('tk_float',    r'^\bfloat\b'),
    ('tk_char',     r'^\bchar\b'),
    ('tk_double',   r'^\bdouble\b'),
    ('tk_struct',   r'^\bstruct\b'),
-
+   ('tk_if',   r'^\bif\b'),
+   ('tk_else',   r'^\belse\b'),
+   ('tk_ident',   r'^\bident\b'),
+   ('tk_while',   r'^\bwhile\b'),
+   ('tk_for',   r'^\bfor\b'),
+   ('tk_do',   r'^\bdo\b'),
+   ('tk_switch',   r'^\bswitch\b'),
+   ('tk_case',   r'^\bcase\b'),
+   ('tk_default',   r'^\bdefault\b'),
    ('tk_logical_and', r"^&{2}"),
    ('tk_logical_or', r"^\|{2}"),
    ('tk_logical_equal', r"^={2}"),
@@ -13,7 +22,6 @@ TOKENS = [
    ('tk_logical_greater_equal', r'^\b>=\b'),
    ('tk_logical_lesser_equal', r'^\b<=\b'),
    ('tk_logical_not_equal', r'^!='),
-
    ('tk_logical_greater', r'^>'),
    ('tk_logical_lesser', r'^<'),
    ('tk_logial_not', r"^\!"),
