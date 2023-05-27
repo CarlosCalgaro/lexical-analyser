@@ -1,4 +1,4 @@
-from compiler import TOKENS as c_tokens
+from compiler import TOKENS
 import re
 import sys
 
@@ -6,32 +6,42 @@ class Compiler:
    token_list = []
    current_line = 0
    current_line_pos = 0
-   lines = None
+   file = None
    output_stream = sys.stdout
 
    def __init__(self, output_stream=None) -> None:
       self.output_stream = output_stream
    
    def compile(self, input_stream):
-      self.lines = input_stream.read()
-      while(self.lines != ""):
+      self.file = input_stream.read()
+      while(self.file != ""):
          token = self.extract_token()
          self.token_list.append(token)
       self.print()
 
    def extract_token(self):
-      self.lines = self.lines.strip()
-      for tkn_value, regex in c_tokens:
-         re_match = re.search(regex, self.lines)
-         if re_match:
-            self.lines = re.sub(regex, '', self.lines)
-            return (re_match, tkn_value)
-      raise SyntaxError(f"can't find a match for: {self.lines}")
+      for tkn_value, regex in TOKENS:
+         match = re.search(regex, self.file)
+         if match:
+            self.file = re.sub(regex, '', self.file)
+            return (match, tkn_value)
+      raise SyntaxError(f"can't find a match for: {self.file}")
 
    def print(self):
       self.output_stream.write(f"Linha\tColuna\tLexema\t\tToken\n")
-      for match in self.token_list:
-         self.output_stream.write(f"{match[1]}: {str(match[0])}\n")
+      line = 1
+      column= 1
+      for found_token in self.token_list:
+         match = found_token[0]
+         token = found_token[1]
+         string = match.group(0)
+         if(token not in ['tk_newline', 'tk_whitespace']):
+            self.output_stream.write(f"\t{line}\t{column}\t{token}\t{string}\n")
+         if(token == 'tk_newline'):
+            line += 1
+            column = 1
+         else:
+            column += match.end()
 
 
 
