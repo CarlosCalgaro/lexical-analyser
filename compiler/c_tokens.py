@@ -1,6 +1,7 @@
 TOKENS = [
    ('tk_whitespace', r'^( )'),
    ('tk_newline', r'^\n'),
+   ('tk_arrow', r'^(->)'),
    ('tk_int',      r'^\bint\b'),
    ('tk_float',    r'^\bfloat\b'),
    ('tk_char',     r'^\bchar\b'),

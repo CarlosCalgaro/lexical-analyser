@@ -28,23 +28,18 @@ class Compiler:
       raise SyntaxError(f"can't find a match for: {self.file}")
 
    def print(self):
-      self.output_stream.write(f"Linha\tColuna\tLexema\t\tToken\n")
+      template = "{0:10} {1:10} {2:28} {3:10}"
+      self.output_stream.write(f"{template.format('LINHA', 'COLUNA', 'LEXEMA', 'TOKEN')}\n")
       line = 1
-      column= 1
+      column = 1
       for found_token in self.token_list:
          match = found_token[0]
          token = found_token[1]
          string = match.group(0)
          if(token not in ['tk_newline', 'tk_whitespace']):
-            self.output_stream.write(f"\t{line}\t{column}\t{token}\t{string}\n")
+            self.output_stream.write(f"{template.format(line, column, token, string)}\n")
          if(token == 'tk_newline'):
             line += 1
             column = 1
          else:
             column += match.end()
-
-
-
-
-
-
