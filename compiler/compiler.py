@@ -20,6 +20,7 @@ class Compiler:
             self.token_list.append(token)
          self.print()
       except LexicErrorException as e:
+         self.print()
          print(e)
 
    def extract_token(self):
