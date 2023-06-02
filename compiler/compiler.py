@@ -1,7 +1,7 @@
 from compiler import TOKENS
+from compiler.errors import LexicErrorException
 import re
 import sys
-
 class Compiler:
    token_list = []
    current_line = 0
@@ -13,11 +13,14 @@ class Compiler:
       self.output_stream = output_stream
    
    def compile(self, input_stream):
-      self.file = input_stream.read()
-      while(self.file != ""):
-         token = self.extract_token()
-         self.token_list.append(token)
-      self.print()
+      try:
+         self.file = input_stream.read()
+         while(self.file != ""):
+            token = self.extract_token()
+            self.token_list.append(token)
+         self.print()
+      except LexicErrorException as e:
+         print(e)
 
    def extract_token(self):
       for tkn_value, regex in TOKENS:
@@ -25,7 +28,7 @@ class Compiler:
          if match:
             self.file = re.sub(regex, '', self.file)
             return (match, tkn_value)
-      raise SyntaxError(f"can't find a match for: {self.file}")
+      raise LexicErrorException(self.file)
 
    def print(self):
       template = "{0:10} {1:10} {2:28} {3:10}"
