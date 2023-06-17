@@ -1,5 +1,5 @@
 import sys
-from compiler import Compiler
+from compiler import LexicalAnalyser
 import argparse
 
 if __name__ == '__main__':
@@ -13,8 +13,10 @@ if __name__ == '__main__':
       output_stream = open(args.output, 'w')
    else:
       output_stream = sys.stdout
-   compiler = Compiler(output_stream=output_stream)
-   compiler.compile(input_stream)
+   lexical_analyser = LexicalAnalyser(output_stream=output_stream)
+   lexical_analyser.compile(input_stream)
 
+   token_list = lexical_analyser.token_list
+   lexical_analyser.print()
    input_stream.close()
    output_stream.close()

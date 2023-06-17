@@ -1,2 +1,2 @@
 from .c_tokens import *
-from .compiler import Compiler
+from .lexical_analyser import LexicalAnalyser

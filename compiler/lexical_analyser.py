@@ -2,7 +2,7 @@ from compiler import TOKENS
 from compiler.errors import LexicErrorException
 import re
 import sys
-class Compiler:
+class LexicalAnalyser:
    token_list = []
    current_line = 0
    current_line_pos = 0
@@ -18,10 +18,11 @@ class Compiler:
          while(self.file != ""):
             token = self.extract_token()
             self.token_list.append(token)
-         self.print()
+         return self.token_list
       except LexicErrorException as e:
          self.print()
          print(e)
+         return []
 
    def extract_token(self):
       for tkn_value, regex in TOKENS:
