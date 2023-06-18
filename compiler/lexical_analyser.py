@@ -1,4 +1,4 @@
-from compiler import TOKENS
+from compiler import TOKENS, TokenList as Tk
 from compiler.errors import LexicErrorException
 import re
 import sys
@@ -41,9 +41,9 @@ class LexicalAnalyser:
          match = found_token[0]
          token = found_token[1]
          string = match.group(0)
-         if(token not in ['tk_newline', 'tk_whitespace']):
+         if(token not in [Tk.TK_NEWLINE, Tk.TK_WHITESPACE]):
             self.output_stream.write(f"{template.format(line, column, token, string)}\n")
-         if(token == 'tk_newline'):
+         if(token == Tk.TK_WHITESPACE):
             line += 1
             column = 1
          else:

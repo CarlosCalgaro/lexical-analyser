@@ -1,4 +1,5 @@
-from .c_tokens import *
+
+from .tokens import *
 from .lexical_analyser import LexicalAnalyser
-from .syntax import Syntax
-from .c_syntax import CSyntax
+from .syntactic_analyser import SyntacticAnalyser
+from .c_syntactic_analyser import CSyntacticAnalyser
