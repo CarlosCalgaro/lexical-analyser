@@ -1,11 +1,9 @@
-from compiler import TOKENS, TokenList as Tk
+from compiler import Token, TOKENS, TokenList as Tk
 from compiler.errors import LexicErrorException
 import re
 import sys
 class LexicalAnalyser:
    token_list = []
-   current_line = 0
-   current_line_pos = 0
    file = None
    output_stream = sys.stdout
 
@@ -21,7 +19,6 @@ class LexicalAnalyser:
          return self.token_list
       except LexicErrorException as e:
          self.print()
-         print(e)
          return []
 
    def extract_token(self):
@@ -29,22 +26,25 @@ class LexicalAnalyser:
          match = re.search(regex, self.file)
          if match:
             self.file = re.sub(regex, '', self.file)
-            return (match, tkn_value)
+            return Token(tkn_value, match) 
       raise LexicErrorException(self.file)
 
    def print(self):
       template = "{0:10} {1:10} {2:28} {3:10}"
       self.output_stream.write(f"{template.format('LINHA', 'COLUNA', 'LEXEMA', 'TOKEN')}\n")
-      line = 1
-      column = 1
-      for found_token in self.token_list:
-         match = found_token[0]
-         token = found_token[1]
-         string = match.group(0)
-         if(token not in [Tk.TK_NEWLINE, Tk.TK_WHITESPACE]):
-            self.output_stream.write(f"{template.format(line, column, token, string)}\n")
-         if(token == Tk.TK_WHITESPACE):
-            line += 1
-            column = 1
-         else:
-            column += match.end()
+      for token in self.token_list:
+         self.output_stream.write(f"{template.format(token.line, token.column, token.name, token.string() )}\n")
+
+      # line = 1
+      # column = 1
+      # for found_token in self.token_list:
+      #    match = found_token[0]
+      #    token = found_token[1]
+      #    string = match.group(0)
+      #    if(token not in [Tk.TK_NEWLINE, Tk.TK_WHITESPACE]):
+      #       self.output_stream.write(f"{template.format(line, column, token, string)}\n")
+      #    if(token == Tk.TK_WHITESPACE):
+      #       line += 1
+      #       column = 1
+      #    else:
+      #       column += match.end()
