@@ -1,5 +1,5 @@
 # define Python user-defined exceptions
-class LexicErrorException(Exception):
+class LexicalErrorException(Exception):
    """Exception raised for lexical errors found in compiled file
    Attributes:
       file being compiled

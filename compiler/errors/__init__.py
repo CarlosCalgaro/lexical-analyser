@@ -1,1 +1,1 @@
-from .lexic_error_exception import LexicErrorException
+from .lexical_error_exception import LexicalErrorException
