@@ -35,3 +35,8 @@ If you don't specify the `--output` argument, the output will be printed to the 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Todo
+
+- Separar TK_ID em numeros & Variaveis
+- Inicializador de variaveis

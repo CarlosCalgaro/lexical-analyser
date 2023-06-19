@@ -4,20 +4,16 @@ declaration_list -> declaration | declaration declaration_list
 
 declaration -> variable_declaration | function_declaration
 
-variable_declaration -> type_specifier variable_declaration_prefix variable_name variable_declaration_suffix ;
-
-variable_name -> TK_CONST | TK_ID
+variable_declaration -> type_specifier variable_declaration_suffix ;
 
 type_specifier -> int | float | char | double | type_specifier_long
 
 type_specifier_long -> long int | long long int
 
-variable_declaration_prefix -> * variable_declaration_prefix | * | vazio
-
-variable_declaration_suffix -> array_suffix | vazio
+variable_declaration_suffix -> variable_name | variable_name array_suffix | variable_name pointer_suffix
 
 array_suffix -> [ constant_expression ]
- 
+
 pointer_suffix -> * pointer_suffix | *
 
 function_declaration -> type_specifier function_name ( parameter_list ) compound_statement

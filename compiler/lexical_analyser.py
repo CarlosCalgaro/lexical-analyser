@@ -22,6 +22,7 @@ class LexicalAnalyser:
             column = 1
          else:
             column += token[1].end()
+      self.token_list.append(Token(Tk.TK_EOF, None, line, column))
       return self.token_list
 
    def extract_token(self):

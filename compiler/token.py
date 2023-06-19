@@ -8,4 +8,6 @@ class Token():
       self.column = column
 
    def string(self):
-      return self.match.group(0)
+      if self.match is not None:
+         return self.match.group(0)
+      return ''
