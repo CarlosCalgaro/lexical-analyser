@@ -1,0 +1,106 @@
+from compiler.syntactic import SyntacticAnalyser
+from compiler import SPECIFIER_MUTATOR_LIST, TYPE_SPECIFIER_LIST, TokenList as Tk
+
+class CSyntacticAnalyser(SyntacticAnalyser):
+
+   def __init__(self, token_list) -> None:
+      self.tabs = 0
+      super().__init__(token_list)
+
+   def analyze(self) -> bool:
+      if self.declaration_list():
+         if(self.get_token_name() == Tk.TK_EOF):
+            print("PASSOU")
+         else: 
+            print("REPROVOU")
+      else:
+         print("REPROVOU")
+
+   def declaration_list(self) -> bool:
+      self.print_tree("Declaration List")
+      if self.declaration():
+         self.tabs = 0
+         if self.declaration_list():
+            return True
+         else:
+            return True
+      return False
+
+   def declaration(self) -> bool:
+      self.print_tree("Declaration")
+      if self.variable_declaration(): #or self.function_declaration():
+         return True
+      else:
+         return False
+
+   def variable_declaration(self) -> bool:
+      self.print_tree("Variable Declaration")
+      if self.type_specifier():
+         if self.variable_declaration_prefix():
+            if self.get_token_name() == Tk.TK_ID:
+               self.consume_token()
+               if self.variable_declaration_suffix():
+                  if self.get_token_name() == Tk.TK_SEMICOLON:
+                     return True
+      return False
+   def variable_declaration_prefix(self) -> bool:
+      self.print_tree("Variable Declaration Prefix")
+      if self.pointer_suffix
+   def variable_declaration_suffix(self) -> bool:
+      self.print_tree("Variable Declaration Suffix")
+      if self.get_token_name() == Tk.TK_ID:
+         self.print_tree(f"TK_ID: {self.get_token().string()}")
+         self.consume_token()
+         if self.array_suffix():
+            return True
+         if self.pointer_suffix():
+            return True
+         return True
+
+   # Testar a[1] a[1+1] a[b] a[CONSTANTE]
+   def array_suffix(self) -> bool:
+      if self.get_token_name() == Tk.TK_OPEN_BRACKET:
+         self.consume_token()
+         if self.get_token_name() == Tk.TK_CONST or self.get_token_name() == Tk.TK_ID:
+            self.print_tree(f"[{self.get_token_name()}]")
+            self.consume_token()
+            if self.get_token_name() == Tk.TK_CLOSE_BRACKET:
+               self.consume_token()
+               return True
+      return False
+
+
+   def type_specifier(self) -> bool:
+      self.print_tree("Type Specifier")
+      if self.get_token_name() in TYPE_SPECIFIER_LIST:
+         self.print_tree(self.get_token_name(), False)
+         self.consume_token()
+         return True
+      elif self.type_specifier_long():
+         return True
+      else:
+         return False
+
+   def type_specifier_long(self) -> bool:
+      self.print_tree("Type Specifier Long")
+      if self.get_token_name() == Tk.TK_LONG:
+         self.print_tree("- LONG", False)
+         self.consume_token()
+         if self.get_token_name() == Tk.TK_INT:
+            self.print_tree("- INT", False)
+            self.consume_token()
+            return True
+         elif self.get_token_name() == Tk.TK_LONG:
+            self.print_tree("- LONG", False)
+            self.consume_token()
+            if self.get_token_name() == Tk.TK_INT:
+               self.print_tree("- INT", False)
+               self.consume_token()
+               return True
+      return False
+   
+   def print_tree(self, method, tabulate=True):
+      tab_chars = '\t'*self.tabs
+      print(f"{tab_chars} {method}")
+      if tabulate:
+         self.tabs += 1 

@@ -1,2 +1,2 @@
-from .syntactic_analyser import SyntacticAnalyser
-from .c_syntactic_analyser import CSyntacticAnalyser
+from .expressions import *
+from .c_parser import CParser

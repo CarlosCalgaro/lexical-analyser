@@ -1,6 +1,6 @@
 import sys
 from compiler import LexicalAnalyser
-from compiler import CSyntacticAnalyser
+from compiler import CParser
 import argparse
 
 if __name__ == '__main__':
@@ -18,5 +18,7 @@ if __name__ == '__main__':
    lexical_analyser.compile(input_stream)
    lexical_analyser.print()
    token_list = lexical_analyser.token_list
+   syntactical_analyser = CParser(token_list)
+   syntactical_analyser.analyze()
    input_stream.close()
    output_stream.close()
