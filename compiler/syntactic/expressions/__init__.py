@@ -2,3 +2,6 @@ from .expression import Expression
 from .declaration_list_expression import DeclarationListExpression
 from .declaration_expression import DeclarationExpression
 from .variable_declaration_expression import VariableDeclarationExpression
+from .translation_unit_expression import TranslationUnitExpression
+from .variable_name_expression import VariableNameExpression
+from .type_specifier_long_expression import TypeSpecifierLongExpression

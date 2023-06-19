@@ -6,6 +6,8 @@ declaration -> variable_declaration | function_declaration
 
 variable_declaration -> type_specifier variable_declaration_prefix variable_name variable_declaration_suffix ;
 
+variable_name -> TK_CONST | TK_ID
+
 type_specifier -> int | float | char | double | type_specifier_long
 
 type_specifier_long -> long int | long long int
