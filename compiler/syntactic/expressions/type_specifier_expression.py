@@ -1,5 +1,5 @@
 from .expression import Expression
-from compiler import TYPE_SPECIFIER_LIST
+from compiler import TYPE_SPECIFIER_LIST, TokenList as Tk
 from .type_specifier_long_expression import TypeSpecifierLongExpression
 
 class TypeSpecifierExpression(Expression):
@@ -7,7 +7,10 @@ class TypeSpecifierExpression(Expression):
    def interpret(self):
       self.print_tree('Type Specifier', 4)
       if self.interpret_type_specifier_long():
-         return True
+         self.print_tree(f"- Consumed {self.current_token_name()}", 6)
+         if self.current_token_name() == Tk.TK_INT:
+            self.consume_token()
+            return True
       elif self.current_token_name() in TYPE_SPECIFIER_LIST:
         self.print_tree(f" - Consumed {self.current_token_name()}", 5)
         self.consume_token()

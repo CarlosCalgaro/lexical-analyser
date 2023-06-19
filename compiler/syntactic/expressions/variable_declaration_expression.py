@@ -13,8 +13,6 @@ class VariableDeclarationExpression(Expression):
              self.print_tree(f" - Consumed {self.current_token_name()}", 4)
              self.consume_token()
              return True
-          return False
-        return False
       return False
 
    def interpret_variable_name(self):

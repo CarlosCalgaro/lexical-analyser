@@ -11,6 +11,5 @@ class DeclarationListExpression(Expression):
          declaration_list_expression = DeclarationListExpression(self.tokens)
          if declaration_list_expression.interpret():
             self.tokens = declaration_list_expression.tokens
-            return True
          return True
       return False
