@@ -109,7 +109,7 @@ TOKENS = [
     (TokenList.TK_CONST, r"^\d+(\.\d+)?"),
     (TokenList.TK_ID, r'^[a-zA-Z_][a-zA-Z0-9_]*')
 ]
-ASSIGNABLES_LIST = [TokenList.TK_ID, TokenList.TK_CONST]
+ASSIGNABLES_LIST = [TokenList.TK_ID]
 OPERATOR_LIST = [ TokenList.TK_PLUS, TokenList.TK_HYPHEN, TokenList.TK_ASTERISK, TokenList.TK_SLASH, TokenList.TK_PERCENT]
 SPECIFIER_MUTATOR_LIST = [TokenList.TK_UNSIGNED, TokenList.TK_LONG]
 TYPE_SPECIFIER_LIST = [TokenList.TK_INT, TokenList.TK_FLOAT, TokenList.TK_CHAR, TokenList.TK_DOUBLE]
