@@ -1,4 +1,4 @@
-program -> declaration_list
+translation_unit -> declaration_list
 
 declaration_list -> declaration | declaration declaration_list
 

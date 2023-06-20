@@ -16,7 +16,8 @@ class VariableDeclarationExpression(Expression):
              self.consume_token()
              return True
           else:
-             print(f"Unexpected token: {self.current_token_name()}")
+            self.print_expected_token()
+            #  print(f"Unexpected token: {self.current_token_name()}")
       return False
    def interpret_variable_declaration_suffix(self):
       variable_declaration_suffix = VariableDeclarationSuffixExpression(self.tokens)
