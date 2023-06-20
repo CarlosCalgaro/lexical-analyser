@@ -1,6 +1,5 @@
 from abc import abstractmethod
-from compiler import Token
-
+from compiler import Token, TokenList
 class Expression():
    def __init__(self, tokens) -> None:
       self.tokens = tokens
@@ -17,15 +16,29 @@ class Expression():
 
    def interpret_expression(self, expression_type, replace_tokens = True) -> bool:
       expression = expression_type(self.tokens)
-      print(f"Evaluating: {expression_type.__name__}")
+      self.print_evaluate(expression_type)
       evaluated = expression.interpret()
-      if replace_tokens:
+      if evaluated and replace_tokens:
          self.tokens = expression.tokens
       return evaluated
 
    def check_tokens(self, tokens = []) -> bool:
-      if type(tokens) is Token: tokens = [tokens]
+      if isinstance(tokens, TokenList): tokens = [tokens]
       if type(tokens) is list:
-         return self.current_token_name() in tokens
+         if self.current_token_name() in tokens:
+            # print(f"Consuming token: {self.current_token_name()}")
+            self.consume_token()
+            return True
+         # print(f"Token not found, expected: {tokens}, found {self.current_token_name()}")
+         return False
       else:
          raise AttributeError('token must be a token or list of tokens')
+   def level(self):
+      return 0
+   
+   def print_token_list(self):
+      print([[x.name, x.string()] for x in self.tokens])
+
+   def print_evaluate(self, expression_type):
+      tabs = '\t' * self.level()
+      # print(f"{tabs} Evaluating: {expression_type.__name__}")

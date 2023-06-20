@@ -1,10 +1,14 @@
 from .expression import Expression
-from .declaration_list_expression import DeclarationListExpression
-from .declaration_expression import DeclarationExpression
-from .variable_declaration_expression import VariableDeclarationExpression
-from .translation_unit_expression import TranslationUnitExpression
-from .variable_name_expression import VariableNameExpression
-from .type_specifier_long_expression import TypeSpecifierLongExpression
-from .variable_declaration_prefix_expression import VariableDeclarationPrefixExpression
-from .variable_declaration_suffix_expression import VariableDeclarationSuffixExpression
-from .array_suffix_expression import ArraySuffixExpression
+from .declaration_list import DeclarationList
+from .declaration import Declaration
+from .variable_declaration import VariableDeclaration
+from .function_declaration import FunctionDeclaration
+from .translation_unit import TranslationUnit
+from .type_specifier import TypeSpecifier
+from .type_long import TypeLong
+
+# from .variable_name import VariableName
+# from .type_specifier_long import TypeSpecifierLong
+# from .variable_declaration_prefix import VariableDeclarationPrefix
+# from .variable_declaration_suffix import VariableDeclarationSuffix
+# from .array_suffix import ArraySuffix

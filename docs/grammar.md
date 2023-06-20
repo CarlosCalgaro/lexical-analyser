@@ -20,7 +20,9 @@ array_suffix -> [ constant_expression ]
  
 pointer_suffix -> * pointer_suffix | *
 
-function_declaration -> type_specifier function_name ( parameter_list ) compound_statement
+function_declaration -> 
+   type_specifier function_name ( parameter_list ) compound_statement | 
+   type_specifier function_name ( ) compound_statement
 
 parameter_list -> parameter | parameter , parameter_list
 
