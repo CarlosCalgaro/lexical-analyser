@@ -16,5 +16,9 @@ class FunctionDeclaration(Expression):
          if self.check_tokens(Tk.TK_OPEN_PARENTHESIS) and (self.interpret_expression(ParametersList) or True):
             if self.check_tokens(Tk.TK_CLOSE_PARENTHESIS):
                if self.interpret_expression(CompoundStatement):
+                  self.check_tokens(Tk.TK_SEMICOLON)
+                  print("Found a function")
+                  self.print_token_list()
+                  self.consumed_tokens = []
                   return True
       return False

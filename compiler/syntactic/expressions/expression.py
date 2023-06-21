@@ -3,6 +3,7 @@ from compiler import Token, TokenList
 class Expression():
    def __init__(self, tokens) -> None:
       self.tokens = tokens
+      self.consumed_tokens = []
 
    @abstractmethod
    def current_token(self) -> Token:
@@ -20,6 +21,7 @@ class Expression():
       evaluated = expression.interpret()
       if evaluated and replace_tokens:
          self.tokens = expression.tokens
+         self.consumed_tokens = self.consumed_tokens + expression.consumed_tokens
       return evaluated
 
    def check_tokens(self, tokens = []) -> bool:
@@ -27,6 +29,7 @@ class Expression():
       if type(tokens) is list:
          if self.current_token_name() in tokens:
             # print(f"Consuming token: {self.current_token_name()}")
+            self.consumed_tokens.append(self.current_token())
             self.consume_token()
             return True
          # print(f"Token not found, expected: {tokens}, found {self.current_token_name()}")
@@ -37,7 +40,8 @@ class Expression():
       return 0
    
    def print_token_list(self):
-      print([[x.name, x.string()] for x in self.tokens])
+      # print(' '.join([x.name for x in self.consumed_tokens]))
+      print(' '.join([x.string() for x in self.consumed_tokens]))
 
    def print_evaluate(self, expression_type):
       tabs = '\t' * self.level()
