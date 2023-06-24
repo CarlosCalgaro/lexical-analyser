@@ -28,11 +28,17 @@ parameter_list -> parameter | parameter , parameter_list
 
 parameter -> type_specifier parameter_name
 
-compound_statement -> { statement_list }
+compound_statement -> { statement_list }  | { }
 
 statement_list -> statement | statement statement_list
 
-statement -> while_statement | do_while_statement | for_statement | if_statement | compound_statement | expression_statement
+statement -> iteration_statement | if_statement | compound_statement | expression_statement
+
+iteration_statement -> 
+   WHILE '(' expression ')' statement |
+   DO statement WHILE '(' expression ')' ';' |
+   FOR '(' expression_statement expression_statement ')' statement |
+   FOR '(' expression_statement expression_statement expression ')' statement |
 
 while_statement -> while ( expression ) statement
 

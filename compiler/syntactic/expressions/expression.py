@@ -41,8 +41,13 @@ class Expression():
    
    def print_token_list(self):
       # print(' '.join([x.name for x in self.consumed_tokens]))
-      print(' '.join([x.string() for x in self.consumed_tokens]))
+      print(f"\t- {' '.join([x.string() for x in self.consumed_tokens])}")
 
    def print_evaluate(self, expression_type):
       tabs = '\t' * self.level()
       # print(f"{tabs} Evaluating: {expression_type.__name__}")
+
+   def print_found_expression(self, text):
+      print(f"Found: {text}:")
+      self.print_token_list()
+      self.consumed_tokens = []
