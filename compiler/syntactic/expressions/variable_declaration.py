@@ -12,6 +12,12 @@ class VariableDeclaration(Expression):
          if self.interpret_expression(VariableName):
             self.interpret_expression(VariableDeclarationSuffix)
             if self.check_tokens(Tk.TK_SEMICOLON):
+<<<<<<< HEAD
                self.print_found_expression("Variable")
+=======
+               print("Found a variable:")
+               self.print_token_list()
+               self.consumed_tokens = []
+>>>>>>> 62377de8e18e508808af2c1213d6174584f27b01
                return True
       return False

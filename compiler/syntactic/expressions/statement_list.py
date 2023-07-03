@@ -1,6 +1,7 @@
 from .expression import Expression
-from compiler import TokenList as Tk
 from .statement import Statement
+from compiler import TokenList as Tk
+
 class StatementList(Expression):
 
    def interpret(self):

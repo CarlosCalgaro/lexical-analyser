@@ -1,10 +1,15 @@
 from .expression import Expression
-from compiler import TokenList as Tk
 from .iteration_statement import IterationStatement
+from .compound_statement import CompoundStatement
+
+from compiler import TokenList as Tk
 
 class Statement(Expression):
 
-   def interpret(self):
-      if self.interpret_expression(IterationStatement):
+   def interprete(self):
+      if self.interpret_expression(IterationStatement) or self.interpret_expression(CompoundStatement):
          return True
       return False
+
+   def interpret(self):
+      return True
